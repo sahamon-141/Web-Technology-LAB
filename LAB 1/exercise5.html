@@ -25,8 +25,6 @@
 
         .about {
             text-align: center;
-            background-color: bisque;
-            color: black;
 
         }
 
@@ -41,6 +39,14 @@
             align-items: center;
             gap: 20px;
         }
+
+        section {
+            background-color: white;
+            margin-bottom: 30px;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
     </style>
 </head>
 
@@ -49,37 +55,56 @@
         <h1>Sahajit Mondal</h1>
         <p>I am a Web Developer.</p>
     </header>
-    <div id="about" class="about">
-        <h2><u>About Me</u></h2>
-        <p>I am a aspiring web developer studying at vellore institute of Technology AP.<br>I am learning basic
-            concepts of web development.</p>
-    </div>
-    <div id="skills" class="skills">
-        <h2><u>Skills</u></h2>
-        <ul>
-            <li>HTML</li>
-            <li>CSS</li>
-            <li>JavaScript</li>
-            <li>React.js</li>
-        </ul>
-    </div>
-    <div id="Projects">
-        <h2><u>Projects</u></h2>
-        <ul>
-            <li>
-                <h3><b><u>Discord Chatbot</u></b></h3>
-                <p>I have made a Discord Chatbot using OpenAI API</p>
-            </li>
-            <li>
-                <h3><b><u>Youtube Clone</u></b></h3>
-                <p>A basic clone for Youtube using html and css.</p>
-            </li>
-        </ul>
+    <div class="container">
+        <!-- About Me Section -->
+        <section class="about">
+            <h2>About Me</h2>
+            <p>Hello! I'm Alex, a passionate frontend developer with 3 years of experience creating responsive and
+                user-friendly web applications. I specialize in HTML, CSS, and JavaScript, and I'm constantly exploring
+                new frameworks and design trends. I believe in writing clean, efficient code and creating interfaces
+                that provide exceptional user experiences. When I'm not coding, you can find me hiking, reading tech
+                blogs, or experimenting with new web technologies.</p>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="skills">
+            <h2>My Skills</h2>
+            <ul>
+                <li>HTML5 & CSS3</li>
+                <li>JavaScript (ES6+)</li>
+                <li>React.js</li>
+                <li>Responsive Web Design</li>
+                <li>UI/UX Design Principles</li>
+                <li>Git & Version Control</li>
+                <li>Web Performance Optimization</li>
+                <li>Cross-browser Compatibility</li>
+            </ul>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="projects">
+            <h2>My Projects</h2>
+            <div class="projects-container">
+                <div class="project-card">
+                    <h3>E-Commerce Dashboard</h3>
+                    <p>A comprehensive dashboard for e-commerce analytics with interactive charts, sales tracking, and
+                        inventory management features. Built with React and Chart.js.</p>
+                </div>
+                <div class="project-card">
+                    <h3>Travel Blog Platform</h3>
+                    <p>A responsive travel blog platform with user authentication, photo galleries, and location
+                        mapping. Implemented with HTML, CSS, JavaScript and integrated with Mapbox API.</p>
+                </div>
+            </div>
+        </section>
     </div>
     <footer>
-        <h2><u>Contact Me</u></h2>
-        <p>Email: sahajit@gmail.com</p>
-        <p>Phone Number: 123456789</p>
+        <div class="container">
+            <div class="contact-info">
+                <p>Contact me: <a href="mailto:sahajitmondal07@gmail.com">sahajitmondal07@gmail.com.com</a></p>
+                <p>Connect on <a href="#">LinkedIn</a> | <a href="#">GitHub</a></p>
+            </div>
+        </div>
     </footer>
 
 </body>
