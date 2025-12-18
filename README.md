@@ -17,5 +17,3 @@ Click below to view the HTML pages directly in the browser 👇
 
 ---
 
-## 📦 Repo Structure  
-
