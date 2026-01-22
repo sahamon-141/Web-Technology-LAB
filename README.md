@@ -23,10 +23,10 @@ Click below to view the HTML pages directly in the browser 👇
 ---
 
 ### 🔹 LAB 3 Javascript Validation 
-- Webpage preview → https://sahamon-141.github.io/Web-Technology-LAB/LAB%203%20Javascript%20validation%2Cevent/exercise1.html
-- Webpage preview → https://sahamon-141.github.io/Web-Technology-LAB/LAB%203%20Javascript%20validation%2Cevent/exercise2.html
-- Webpage preview → https://sahamon-141.github.io/Web-Technology-LAB/LAB%203%20Javascript%20validation%2Cevent/exercise3.html
-- Webpage preview → https://sahamon-141.github.io/Web-Technology-LAB/LAB%203%20Javascript%20validation%2Cevent/exercise4.html
-- Webpage preview → https://sahamon-141.github.io/Web-Technology-LAB/LAB%203%20Javascript%20validation%2Cevent/exercise5.html
+- Exercise 1 → https://sahamon-141.github.io/Web-Technology-LAB/LAB%203%20Javascript%20validation%2Cevent/exercise1.html
+- Exercise 2 → https://sahamon-141.github.io/Web-Technology-LAB/LAB%203%20Javascript%20validation%2Cevent/exercise2.html
+- Exercise 3 → https://sahamon-141.github.io/Web-Technology-LAB/LAB%203%20Javascript%20validation%2Cevent/exercise3.html
+- Exercise 4 → https://sahamon-141.github.io/Web-Technology-LAB/LAB%203%20Javascript%20validation%2Cevent/exercise4.html
+- Exercise 5 → https://sahamon-141.github.io/Web-Technology-LAB/LAB%203%20Javascript%20validation%2Cevent/exercise5.html
 
 ---
