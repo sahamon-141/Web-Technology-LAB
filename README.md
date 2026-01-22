@@ -17,3 +17,5 @@ Click below to view the HTML pages directly in the browser 👇
 
 ---
 
+### 🔹 LAB 2 
+- Webpage preview → https://sahamon-141.github.io/Web-Technology-LAB/LAB%202%20advanced%20css%20%2C%20javascript/index.html
