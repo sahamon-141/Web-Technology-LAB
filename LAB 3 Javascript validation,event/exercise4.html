@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Activity Logger</title>
+</head>
+
+<body onload="initLogger()">
+
+    <center>
+        <h1>User Activity Monitor</h1>
+        <p>Interact with the elements below. Events are logged in real-time.</p>
+
+        <!-- Area to demonstrate Bubbling vs Capturing -->
+        <div id="captureZone" style="border: 2px dashed blue; padding: 20px; width: 50%; margin-bottom: 20px;">
+            <h3>Outer Zone (Capture Phase Tracking)</h3>
+            <p>Clicking here or inside tracks 'Click' events.</p>
+
+            <input type="text" id="trackInput" placeholder="Type here to track keys..." size="30">
+            <br><br>
+            <button id="trackBtn">Click Me (Bubbling Phase)</button>
+        </div>
+
+        <!-- Controls -->
+        <div style="margin-bottom: 20px;">
+            <button onclick="resetLog()">Reset Log</button>
+            <button onclick="exportLog()">Export Log (Text)</button>
+        </div>
+
+        <!-- Warning Area -->
+        <div id="warningBox" style="color: red; font-weight: bold; height: 20px;"></div>
+
+        <!-- Log Display -->
+        <table border="1" cellspacing="0" cellpadding="5" width="80%">
+            <thead>
+                <tr bgcolor="#eeeeee">
+                    <th>Timestamp</th>
+                    <th>Event Type</th>
+                    <th>Target Element</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody id="logBody">
+                <!-- Logs go here -->
+            </tbody>
+        </table>
+
+    </center>
+
+    <script>
+        var activityLog = [];
+        var clickCount = 0;
+        var lastClickTime = 0;
+
+        function initLogger() {
+            var input = document.getElementById("trackInput");
+            var btn = document.getElementById("trackBtn");
+            var zone = document.getElementById("captureZone");
+
+            zone.addEventListener("click", function (e) {
+                logActivity("Click (Capture)", zone.id, "Phase: Capturing (Parent)");
+            }, true);
+            btn.addEventListener("click", function (e) {
+                logActivity("Click (Bubble)", btn.id, "Phase: Bubbling (Target)");
+                checkSuspiciousBehavior();
+            }, false);
+
+            input.addEventListener("keypress", function (e) {
+                logActivity("KeyPress", input.id, "Key: " + e.key);
+            });
+
+            input.addEventListener("focus", function (e) {
+                logActivity("Focus", input.id, "Input gained focus");
+            });
+
+            input.addEventListener("blur", function (e) {
+                logActivity("Blur", input.id, "Input lost focus");
+            });
+
+            document.body.addEventListener("click", function (e) {
+                if (e.target.tagName !== "BUTTON" && e.target.id !== "captureZone") {
+                    logActivity("Click (Body)", e.target.tagName, "Clicked somewhere on body");
+                }
+            });
+        }
+
+        function logActivity(type, target, details) {
+            var now = new Date();
+            var timestamp = now.toLocaleTimeString() + "." + now.getMilliseconds();
+
+            var entry = {
+                id: activityLog.length + 1,
+                time: timestamp,
+                type: type,
+                target: target,
+                details: details
+            };
+
+            activityLog.unshift(entry);
+            renderLog();
+        }
+
+        function renderLog() {
+            var tbody = document.getElementById("logBody");
+            tbody.innerHTML = "";
+
+            var limit = activityLog.length < 20 ? activityLog.length : 20;
+
+            for (var i = 0; i < limit; i++) {
+                var item = activityLog[i];
+                var tr = document.createElement("tr");
+
+                tr.innerHTML = "<td>" + item.time + "</td>" +
+                    "<td>" + item.type + "</td>" +
+                    "<td>" + item.target + "</td>" +
+                    "<td>" + item.details + "</td>";
+
+                tbody.appendChild(tr);
+            }
+        }
+
+        function checkSuspiciousBehavior() {
+            var now = new Date().getTime();
+
+            if (now - lastClickTime < 500) {
+                clickCount++;
+            } else {
+                clickCount = 1;
+            }
+            lastClickTime = now;
+
+            var warn = document.getElementById("warningBox");
+            if (clickCount >= 5) {
+                warn.innerText = "WARNING: Suspicious rapid clicking detected!";
+                logActivity("SECURITY ALERT", "System", "Rapid clicking detected!");
+                clickCount = 0;
+                setTimeout(function () { warn.innerText = ""; }, 3000);
+            }
+        }
+
+        function resetLog() {
+            activityLog = [];
+            renderLog();
+            document.getElementById("warningBox").innerText = "";
+        }
+
+        function exportLog() {
+            if (activityLog.length === 0) {
+                alert("Log is empty.");
+                return;
+            }
+
+            var text = "Activity Log Export:\n====================\n";
+            for (var i = 0; i < activityLog.length; i++) {
+                var l = activityLog[i];
+                text += "[" + l.time + "] " + l.type + " on " + l.target + " (" + l.details + ")\n";
+            }
+
+            var blob = new Blob([text], { type: "text/plain" });
+            var anchor = document.createElement("a");
+            anchor.download = "activity_log.txt";
+            anchor.href = window.URL.createObjectURL(blob);
+            anchor.target = "_blank";
+            anchor.style.display = "none";
+            document.body.appendChild(anchor);
+            anchor.click();
+            document.body.removeChild(anchor);
+        }
+
+    </script>
+</body>
+
+</html>

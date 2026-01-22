@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Shopping Cart Exercise</title>
+</head>
+
+<body>
+
+    <center>
+        <h1>Shopping Cart System</h1>
+
+        <fieldset style="width: 50%;">
+            <legend>Add New Product</legend>
+            <table border="0">
+                <tr>
+                    <td>Name:</td>
+                    <td><input type="text" id="newName" placeholder="Item Name"></td>
+                </tr>
+                <tr>
+                    <td>Price:</td>
+                    <td><input type="number" id="newPrice" placeholder="Price"></td>
+                </tr>
+                <tr>
+                    <td>Category:</td>
+                    <td>
+                        <select id="newCategory">
+                            <option value="General">General</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Clothing">Clothing</option>
+                            <option value="Food">Food</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <button onclick="addProduct()">Add to Cart</button>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+
+        <br><br>
+
+        <table border="1" cellspacing="0" cellpadding="5" width="80%">
+            <thead>
+                <tr bgcolor="#cccccc">
+                    <th>Product Name</th>
+                    <th>Category</th>
+                    <th>Price ($)</th>
+                    <th>Quantity</th>
+                    <th>Subtotal ($)</th>
+                    <th>Discount Info</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="cartBody">
+            </tbody>
+        </table>
+
+        <br>
+        <table border="0" width="80%">
+            <tr>
+                <td valign="top">
+                    <h3>Coupon Code</h3>
+                    <input type="text" id="couponCode" placeholder="Enter code (e.g. SAVE10)">
+                    <button onclick="applyCoupon()">Apply Coupon</button>
+                    <p id="couponMessage" style="color: blue;"></p>
+                </td>
+                <td align="right" valign="top">
+                    <table border="1" cellpadding="5" cellspacing="0">
+                        <tr>
+                            <td><b>Gross Total:</b></td>
+                            <td id="grossTotal">$0.00</td>
+                        </tr>
+                        <tr>
+                            <td><b>Bulk/Cat Discounts:</b></td>
+                            <td id="itemDiscounts" style="color: green;">-$0.00</td>
+                        </tr>
+                        <tr>
+                            <td><b>Coupon Discount:</b></td>
+                            <td id="couponData" style="color: green;">-$0.00</td>
+                        </tr>
+                        <tr>
+                            <td><b>Time Discount (Happy Hour):</b></td>
+                            <td id="timeDiscount" style="color: green;">-$0.00</td>
+                        </tr>
+                        <tr bgcolor="#ffffcc">
+                            <td><b>FINAL TOTAL:</b></td>
+                            <td id="finalTotal"><b>$0.00</b></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+    </center>
+
+    <script>
+        var cart = [
+            { name: "Laptop", price: 1000, quantity: 1, category: "Electronics" },
+            { name: "T-Shirt", price: 20, quantity: 5, category: "Clothing" },
+            { name: "Apple", price: 2, quantity: 15, category: "Food" }
+        ];
+
+        var activeCouponDiscount = 0;
+
+        function applyCoupon() {
+            var input = document.getElementById("couponCode").value;
+            var msg = document.getElementById("couponMessage");
+            var code = input.trim().toUpperCase();
+
+            if (code === "SAVE10") {
+                activeCouponDiscount = 0.10;
+                msg.innerHTML = "Coupon 'SAVE10' applied! 10% off specific items.";
+                msg.style.color = "green";
+            } else if (code === "WELCOME") {
+                activeCouponDiscount = 0.05;
+                msg.innerHTML = "Coupon 'WELCOME' applied! 5% off total.";
+                msg.style.color = "green";
+            } else if (code === "") {
+                activeCouponDiscount = 0;
+                msg.innerHTML = "";
+            } else {
+                activeCouponDiscount = 0;
+                msg.innerHTML = "Invalid Coupon Code.";
+                msg.style.color = "red";
+            }
+            renderCart();
+        }
+
+        function addProduct() {
+            var name = document.getElementById("newName").value;
+            var price = parseFloat(document.getElementById("newPrice").value);
+            var category = document.getElementById("newCategory").value;
+
+            if (name === "" || isNaN(price)) {
+                alert("Please enter valid name and price");
+                return;
+            }
+
+            var found = false;
+            for (var i = 0; i < cart.length; i++) {
+                if (cart[i].name.toLowerCase() === name.toLowerCase()) {
+                    cart[i].quantity++;
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) {
+                cart.push({ name: name, price: price, quantity: 1, category: category });
+            }
+
+
+            document.getElementById("newName").value = "";
+            document.getElementById("newPrice").value = "";
+            renderCart();
+        }
+
+
+        function removeItem(index) {
+            cart.splice(index, 1);
+            renderCart();
+        }
+
+
+        function updateQty(index, newQty) {
+            if (newQty < 1) newQty = 1;
+            cart[index].quantity = parseInt(newQty);
+            renderCart();
+        }
+
+
+        function renderCart() {
+            var tbody = document.getElementById("cartBody");
+            tbody.innerHTML = "";
+
+            var grossTotal = 0;
+            var totalItemDiscounts = 0;
+
+
+            var date = new Date();
+            var hour = date.getHours();
+
+            var isHappyHour = (hour >= 14 && hour <= 17);
+
+            for (var i = 0; i < cart.length; i++) {
+                var p = cart[i];
+                var rowTotal = p.price * p.quantity;
+                grossTotal += rowTotal;
+
+
+                var discountMsg = [];
+                var itemDiscountAmt = 0;
+
+
+                if (p.quantity >= 10) {
+                    var bulkDisc = rowTotal * 0.10;
+                    itemDiscountAmt += bulkDisc;
+                    discountMsg.push("Bulk(10%)");
+                }
+
+
+                if (p.category === "Electronics" && p.price > 100) {
+                    var catDisc = 10 * p.quantity;
+                    itemDiscountAmt += catDisc;
+                    discountMsg.push("Elec(-$10/ea)");
+                }
+
+                totalItemDiscounts += itemDiscountAmt;
+                var finalRowTotal = rowTotal - itemDiscountAmt;
+
+
+                var tr = "<tr>";
+                tr += "<td>" + p.name + "</td>";
+                tr += "<td>" + p.category + "</td>";
+                tr += "<td>$" + p.price.toFixed(2) + "</td>";
+                tr += "<td><input type='number' value='" + p.quantity + "' onchange='updateQty(" + i + ", this.value)' style='width:50px'></td>";
+                tr += "<td>$" + finalRowTotal.toFixed(2) + (itemDiscountAmt > 0 ? " <s style='color:grey'>$" + rowTotal.toFixed(2) + "</s>" : "") + "</td>";
+                tr += "<td style='color:green; font-size:smaller'>" + (discountMsg.length > 0 ? discountMsg.join(", ") : "None") + "</td>";
+                tr += "<td><button onclick='removeItem(" + i + ")'>Remove</button></td>";
+                tr += "</tr>";
+
+                tbody.innerHTML += tr;
+            }
+
+
+
+            var couponDiscountAmt = 0;
+            if (activeCouponDiscount > 0) {
+
+                couponDiscountAmt = grossTotal * activeCouponDiscount;
+            }
+
+
+            var timeDiscountAmt = 0;
+            if (isHappyHour) {
+                timeDiscountAmt = grossTotal * 0.02;
+                document.getElementById("timeDiscount").innerText = "-$" + timeDiscountAmt.toFixed(2) + " (Happy Hour!)";
+            } else {
+                document.getElementById("timeDiscount").innerText = "-$0.00";
+            }
+
+            var finalTotal = grossTotal - totalItemDiscounts - couponDiscountAmt - timeDiscountAmt;
+            if (finalTotal < 0) finalTotal = 0;
+
+
+            document.getElementById("grossTotal").innerText = "$" + grossTotal.toFixed(2);
+            document.getElementById("itemDiscounts").innerText = "-$" + totalItemDiscounts.toFixed(2);
+            document.getElementById("couponData").innerText = "-$" + couponDiscountAmt.toFixed(2);
+            document.getElementById("finalTotal").innerText = "$" + finalTotal.toFixed(2);
+        }
+
+
+        renderCart();
+
+    </script>
+</body>
+
+</html>

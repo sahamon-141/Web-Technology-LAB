@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Multi-Stage Form</title>
+</head>
+
+<body onload="initForm()">
+
+    <center>
+        <h1>User Registration - Step <span id="stepLabel">1</span> of 4</h1>
+
+
+        <div style="width: 50%; border: 1px solid #ccc; height: 20px; background-color: #f0f0f0; margin-bottom: 20px;">
+            <div id="progressBar" style="width: 25%; height: 100%; background-color: #4CAF50; transition: width 0.3s;">
+            </div>
+        </div>
+
+        <form id="regForm" onsubmit="return false;">
+            <fieldset style="width: 50%; padding: 20px;">
+                <legend id="stageLegend">Personal Details</legend>
+
+
+                <div id="stage0" class="stage">
+                    <p>
+                        <label>Full Name:</label><br>
+                        <input type="text" id="fname" placeholder="John Doe">
+                    </p>
+                    <p>
+                        <label>Age:</label><br>
+                        <input type="number" id="age" placeholder="25">
+                    </p>
+                </div>
+
+
+                <div id="stage1" class="stage" style="display: none;">
+                    <p>
+                        <label>Email Address:</label><br>
+                        <input type="email" id="email" placeholder="john@example.com">
+                    </p>
+                    <p>
+                        <label>Phone Number:</label><br>
+                        <input type="text" id="phone" placeholder="1234567890" maxlength="10">
+                    </p>
+                </div>
+
+
+                <div id="stage2" class="stage" style="display: none;">
+                    <p>
+                        <label>Username:</label><br>
+                        <input type="text" id="username" placeholder="johndoe123">
+                    </p>
+                    <p>
+                        <label>Password:</label><br>
+                        <input type="password" id="password" placeholder="******">
+                    </p>
+                </div>
+
+                <div id="stage3" class="stage" style="display: none;">
+                    <h3>Review Your Details</h3>
+                    <table border="1" cellspacing="0" cellpadding="5" width="100%">
+                        <tr>
+                            <td><b>Name:</b></td>
+                            <td id="reviewName"></td>
+                        </tr>
+                        <tr>
+                            <td><b>Age:</b></td>
+                            <td id="reviewAge"></td>
+                        </tr>
+                        <tr>
+                            <td><b>Email:</b></td>
+                            <td id="reviewEmail"></td>
+                        </tr>
+                        <tr>
+                            <td><b>Phone:</b></td>
+                            <td id="reviewPhone"></td>
+                        </tr>
+                        <tr>
+                            <td><b>Username:</b></td>
+                            <td id="reviewUser"></td>
+                        </tr>
+                    </table>
+                    <p>Please verify your information before submitting.</p>
+                </div>
+
+                <p id="errorMsg" style="color: red; display: none;"></p>
+
+                <br>
+                <div style="overflow: auto;">
+                    <button type="button" id="prevBtn" onclick="nextPrev(-1)" style="display: none;">Back</button>
+                    <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                    <button type="button" id="submitBtn" onclick="submitForm()" style="display: none;">Submit</button>
+                </div>
+
+            </fieldset>
+        </form>
+
+    </center>
+
+    <script>
+        var currentStage = 0;
+
+        function initForm() {
+            showStage(currentStage);
+        }
+
+        function showStage(n) {
+            var stages = document.getElementsByClassName("stage");
+
+            for (var i = 0; i < stages.length; i++) {
+                stages[i].style.display = "none";
+            }
+            stages[n].style.display = "block";
+            if (n == 0) {
+                document.getElementById("prevBtn").style.display = "none";
+            } else {
+                document.getElementById("prevBtn").style.display = "inline";
+            }
+
+            if (n == (stages.length - 1)) {
+                document.getElementById("nextBtn").style.display = "none";
+                document.getElementById("submitBtn").style.display = "inline";
+                populateReview();
+            } else {
+                document.getElementById("nextBtn").style.display = "inline";
+                document.getElementById("nextBtn").innerHTML = "Next";
+                document.getElementById("submitBtn").style.display = "none";
+            }
+
+            updateProgress(n);
+        }
+
+        function updateProgress(n) {
+            var stages = document.getElementsByClassName("stage");
+            var percent = ((n + 1) / stages.length) * 100;
+            document.getElementById("progressBar").style.width = percent + "%";
+            document.getElementById("stepLabel").innerText = (n + 1);
+
+            var titles = ["Personal Details", "Contact Info", "Account Setup", "Review & Confirm"];
+            document.getElementById("stageLegend").innerText = titles[n];
+        }
+
+        function nextPrev(n) {
+            if (n == 1 && !validateForm()) return false;
+
+            var stages = document.getElementsByClassName("stage");
+            currentStage = currentStage + n;
+            if (currentStage >= stages.length) {
+                submitForm();
+                return false;
+            }
+
+            showStage(currentStage);
+        }
+
+        function validateForm() {
+            var valid = true;
+            var error = document.getElementById("errorMsg");
+            error.style.display = "none";
+            error.innerText = "";
+
+            if (currentStage == 0) {
+                var name = document.getElementById("fname").value;
+                var age = document.getElementById("age").value;
+                if (name == "") { error.innerText = "Name is required"; valid = false; }
+                else if (age == "" || isNaN(age) || age < 1) { error.innerText = "Valid age is required"; valid = false; }
+
+            } else if (currentStage == 1) {
+                var email = document.getElementById("email").value;
+                var phone = document.getElementById("phone").value;
+                if (email == "" || !email.includes("@")) { error.innerText = "Valid email is required"; valid = false; }
+                else if (phone.length < 10 || isNaN(phone)) { error.innerText = "Phone must be at least 10 digits"; valid = false; }
+
+            } else if (currentStage == 2) {
+                var user = document.getElementById("username").value;
+                var pass = document.getElementById("password").value;
+                if (user == "") { error.innerText = "Username is required"; valid = false; }
+                else if (pass.length < 6) { error.innerText = "Password must be at least 6 characters"; valid = false; }
+            }
+
+            if (!valid) {
+                error.style.display = "block";
+            }
+            return valid;
+        }
+
+        function populateReview() {
+            document.getElementById("reviewName").innerText = document.getElementById("fname").value;
+            document.getElementById("reviewAge").innerText = document.getElementById("age").value;
+            document.getElementById("reviewEmail").innerText = document.getElementById("email").value;
+            document.getElementById("reviewPhone").innerText = document.getElementById("phone").value;
+            document.getElementById("reviewUser").innerText = document.getElementById("username").value;
+        }
+
+        function submitForm() {
+            alert("Registration Successful!\nWelcome " + document.getElementById("fname").value);
+            location.reload();
+        }
+
+    </script>
+</body>
+
+</html>
