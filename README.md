@@ -17,5 +17,16 @@ Click below to view the HTML pages directly in the browser 👇
 
 ---
 
-### 🔹 LAB 2 
+### 🔹 LAB 2 Advanced CSS , Javascript
 - Webpage preview → https://sahamon-141.github.io/Web-Technology-LAB/LAB%202%20advanced%20css%20%2C%20javascript/index.html
+  
+---
+
+### 🔹 LAB 3 Javascript Validation 
+- Webpage preview → https://sahamon-141.github.io/Web-Technology-LAB/LAB%203%20Javascript%20validation%2Cevent/exercise1.html
+- Webpage preview → https://sahamon-141.github.io/Web-Technology-LAB/LAB%203%20Javascript%20validation%2Cevent/exercise2.html
+- Webpage preview → https://sahamon-141.github.io/Web-Technology-LAB/LAB%203%20Javascript%20validation%2Cevent/exercise3.html
+- Webpage preview → https://sahamon-141.github.io/Web-Technology-LAB/LAB%203%20Javascript%20validation%2Cevent/exercise4.html
+- Webpage preview → https://sahamon-141.github.io/Web-Technology-LAB/LAB%203%20Javascript%20validation%2Cevent/exercise5.html
+
+---
