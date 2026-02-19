@@ -30,3 +30,13 @@ Click below to view the HTML pages directly in the browser 👇
 - Exercise 5 → https://sahamon-141.github.io/Web-Technology-LAB/LAB%203%20Javascript%20validation%2Cevent/exercise5.html
 
 ---
+
+### 🔹 LAB 4 Ajax 
+- Web Preview → https://sahamon-141.github.io/Web-Technology-LAB/LAB%204%20Ajax/index.html
+
+---
+
+### 🔹 LAB 5 Reading XML & JSON 
+- Web Preview → https://sahamon-141.github.io/Web-Technology-LAB/LAB%205%20Reading%20XML%20%26%20JSON/index.html
+
+---
