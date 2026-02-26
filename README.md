@@ -40,3 +40,8 @@ Click below to view the HTML pages directly in the browser 👇
 - Web Preview → https://sahamon-141.github.io/Web-Technology-LAB/LAB%205%20Reading%20XML%20%26%20JSON/index.html
 
 ---
+
+### 🔹 LAB 6 MongoDB Basics 
+- Web Preview → https://sahamon-141.github.io/Web-Technology-LAB/LAB%206%20MongoDB%20Basic/23BCE7660_Lab6.pdf
+
+---
