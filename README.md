@@ -43,5 +43,4 @@ Click below to view the HTML pages directly in the browser 👇
 
 ### 🔹 LAB 6 MongoDB Basics 
 - Web Preview → https://sahamon-141.github.io/Web-Technology-LAB/LAB%206%20MongoDB%20Basic/23BCE7660_Lab6.pdf
-- Google Docs Preview → https://docs.google.com/viewer?url=https://raw.githubusercontent.com/USERNAME/REPO/main/myfile.pdf
 ---
