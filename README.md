@@ -44,3 +44,25 @@ Click below to view the HTML pages directly in the browser 👇
 ### 🔹 LAB 6 MongoDB Basics 
 - Web Preview → https://sahamon-141.github.io/Web-Technology-LAB/LAB%206%20MongoDB%20Basic/23BCE7660_Lab6.pdf
 ---
+
+### 🔹 LAB 7 MongoDB Complete 
+How to Run Question 1
+```bash
+cd "Question 1"
+npm install
+npm start
+```
+Open **http://localhost:3001** in your browser.
+
+How to Run Question 2
+```bash
+cd "Question 2"
+npm install
+npm start
+```
+Open **http://localhost:3000** in your browser.
+---
+
+### 🔹 LAB 8 ES6 Basics 
+- Web Preview → https://sahamon-141.github.io/Web-Technology-LAB/LAB%206%20MongoDB%20Basic/23BCE7660_Lab6.pdf
+---
