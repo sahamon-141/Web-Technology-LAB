@@ -61,8 +61,9 @@ npm install
 npm start
 ```
 Open **http://localhost:3000** in your browser.
+
 ---
 
 ### 🔹 LAB 8 ES6 Basics 
-- Web Preview → https://sahamon-141.github.io/Web-Technology-LAB/LAB%206%20MongoDB%20Basic/23BCE7660_Lab6.pdf
+- Web Preview → https://sahamon-141.github.io/Web-Technology-LAB/LAB%208%20ES6%20Basics/index.html
 ---
