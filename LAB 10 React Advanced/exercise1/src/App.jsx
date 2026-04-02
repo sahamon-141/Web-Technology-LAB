@@ -12,7 +12,7 @@ export default function App() {
   const validate = () => {
     let newErrors = {};
 
-    if (!form.name) newErrors.name = "Name is required";
+    if (!form.name) newErrors.name = "Name not given";
     if (!form.email.includes("@")) newErrors.email = "Invalid email";
     if (form.password.length < 6)
       newErrors.password = "Password must be at least 6 characters";
