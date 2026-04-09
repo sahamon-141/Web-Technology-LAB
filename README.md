@@ -70,12 +70,69 @@ Open **http://localhost:3000** in your browser.
 
 ### 🔹 LAB 9 React Basics 
 - exercise 1
+```bash
+cd "exercise 1"
+npm install
+npm run dev
+```
+
 - exercise 2
+```bash
+cd "exercise 2"
+npm install
+npm run dev
+```
+
 - exercise 3
+```bash
+cd "exercise 3"
+npm install
+npm run dev
+```
+
 ---
 
 ### 🔹 LAB 10 React Advanced
 - exercise 1
+```bash
+cd "exercise 1"
+npm install
+npm run dev
+```
 - exercise 2
+```bash
+cd "exercise 2"
+npm install
+npm run dev
+```
+
 - exercise 3
+```bash
+cd "exercise 3"
+npm install
+npm run dev
+```
+
 ---
+
+### 🔹 LAB 11 Node JS Basic
+
+```bash
+npm install
+node exercise1.js
+node exercise2.js
+node exercise3.js
+```
+---
+
+### 🔹 LAB 12 Node JS Advanced
+
+```bash
+npm install
+node exercise1.js
+node exercise2.js
+node exercise3.js
+```
+---
+
+
