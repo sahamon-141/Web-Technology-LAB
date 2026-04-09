@@ -67,3 +67,15 @@ Open **http://localhost:3000** in your browser.
 ### 🔹 LAB 8 ES6 Basics 
 - Web Preview → https://sahamon-141.github.io/Web-Technology-LAB/LAB%208%20ES6%20Basics/index.html
 ---
+
+### 🔹 LAB 9 React Basics 
+- exercise 1
+- exercise 2
+- exercise 3
+---
+
+### 🔹 LAB 10 React Advanced
+- exercise 1
+- exercise 2
+- exercise 3
+---
